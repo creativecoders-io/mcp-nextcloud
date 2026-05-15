@@ -1,0 +1,22 @@
+{
+  "name": "mcp-nextcloud",
+  "version": "1.0.0",
+  "description": "Nextcloud MCP Server - provides tools for file and folder operations via WebDAV",
+  "main": "server.py",
+  "scripts": {
+    "start": "python3 server.py",
+    "docker:build": "docker build -t mcp-nextcloud .",
+    "docker:run": "docker run -i --env-file .env mcp-nextcloud",
+    "docker:compose": "docker compose up -d"
+  },
+  "keywords": ["mcp", "nextcloud", "webdav", "model-context-protocol"],
+  "author": "Creative Coders BV",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/mcp-nextcloud.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/mcp-nextcloud/issues"
+  }
+}

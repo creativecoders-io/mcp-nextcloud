@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  nextcloud-mcp:
+    build: .
+    container_name: nextcloud-mcp
+    environment:
+      - NEXTCLOUD_URL=${NEXTCLOUD_URL}
+      - NEXTCLOUD_USER=${NEXTCLOUD_USER:-assistant}
+      - NEXTCLOUD_APP_PASSWORD=${NEXTCLOUD_APP_PASSWORD}
+    stdin_open: true  # Equivalent to -i flag (keeps stdin open)
+    tty: true         # Equivalent to -t flag (allocates pseudo-TTY)
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
+    name: mcp-network

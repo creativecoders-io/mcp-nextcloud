@@ -111,8 +111,8 @@ export MCP_TRANSPORT=stdio
 python3 server.py
 ```
 
-#### Streamable HTTP Transport
-For independently running MCP servers over HTTP. This is the recommended production transport.
+#### SSE/HTTP Transport
+For independently running MCP servers over HTTP using Server-Sent Events (SSE). This is the recommended production transport.
 
 ```bash
 # Run with HTTP transport
@@ -121,7 +121,7 @@ export PORT=8000
 python3 server.py
 ```
 
-The server will be available at `http://0.0.0.0:8000`
+The server will be available at `http://0.0.0.0:8000` with SSE endpoint at `/messages`
 
 ### Docker Configuration
 

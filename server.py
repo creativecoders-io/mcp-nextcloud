@@ -16,7 +16,6 @@ from webdav3.client import Client
 from openpyxl import Workbook
 from openpyxl.styles import Font
 from mcp.server import Server
-from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent
 
 # Configure logging
@@ -448,13 +447,16 @@ async def call_tool(name: str, arguments: Any) -> list[TextContent]:
         )]
 
 
-async def main():
-    """Run the MCP server."""
-    async with stdio_server() as (read_stream, write_stream):
-        logger.info("Nextcloud MCP Server starting...")
-        await app.run(read_stream, write_stream, app.create_initialization_options())
-
-
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    transport = os.getenv("MCP_TRANSPORT", "stdio")
+    
+    if transport == "http":
+        logger.info("Starting Nextcloud MCP Server with Streamable HTTP transport...")
+        app.run(
+            transport="streamable-http",
+            host="0.0.0.0",
+            port=int(os.getenv("PORT", "8000")),
+        )
+    else:
+        logger.info("Starting Nextcloud MCP Server with stdio transport...")
+        app.run()
